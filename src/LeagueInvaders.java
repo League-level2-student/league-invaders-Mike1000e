@@ -23,7 +23,7 @@ public class LeagueInvaders {
 		public LeagueInvaders(){
 			 frame = new JFrame();
 			 gamePanel = new GamePanel();
-			
+	
 			
 		}
 		
@@ -34,6 +34,7 @@ public class LeagueInvaders {
 			frame.setVisible(true);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.pack();
+			frame.addKeyListener(gamePanel);
 			
 			
 			

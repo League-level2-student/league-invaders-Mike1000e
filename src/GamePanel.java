@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	  int currentState = MENU;
 	  Font titleFont;
 	  Timer frameDraw;
-	 
+	  RocketShip rocket = new RocketShip(250,700,50,50);
 	  public GamePanel() {
 		  frameDraw = new Timer(1000/60,this);
 		    frameDraw.start();
@@ -62,10 +62,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	 void drawGameState(Graphics g) {  
 		 g.setColor(Color.BLACK);
 		 g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		 rocket.draw(g);
 	 }
 	 void drawEndState(Graphics g)  {
 		 g.setColor(Color.RED);
-		 g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.width);
+		 g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		 titleFont = new Font("Arial", Font.PLAIN, 48);
+		 g.setFont(titleFont);
+		 g.setColor(Color.YELLOW);
+		 g.drawString("GAME OVER", 20, 100);
+		 titleFont = new Font("Arial", Font.PLAIN, 24);
+		 g.setFont(titleFont);
+		 g.setColor(Color.YELLOW);
+		 g.drawString("You killed " +  " ememies, POG", 20, 300);
+		 titleFont = new Font("Arial", Font.PLAIN, 24);
+		 g.setFont(titleFont);
+		 g.setColor(Color.YELLOW);
+		 g.drawString("Press ENTER to restart", 20, 500);
 	 }
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -84,18 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
-		    System.out.println("DOWN");
-		}
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
-		    System.out.println("UP");
-		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
-		    System.out.println("RIGHT");
-		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-		    System.out.println("LEFT");
-		}
+		
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -107,6 +109,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		        currentState++;
 		    }
 		}  
+		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+			if(rocket.y<720) {
+				 rocket.down();
+			}
+		}
+		if (e.getKeyCode()==KeyEvent.VK_UP) {
+			if(rocket.y>20) {
+				 rocket.up();
+			}
+		  
+		}
+		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			if(rocket.x<420) {
+				 rocket.right();
+			}
+		}
+		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+			if(rocket.x>20) {
+				 rocket.left();
+			}
+		}
 	
 
 	}
